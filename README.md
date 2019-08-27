@@ -1,2 +1,2 @@
 # TensorFlowProjects
-# It contsians the practice code 
+# It contnains the practice code 
