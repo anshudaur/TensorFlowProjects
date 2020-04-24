@@ -1,26 +1,19 @@
-import os
-
 import numpy as np
 
 
 class MNISTDataset:
     """'Bare minimum' class to wrap MNIST numpy arrays into a dataset."""
-    def __init__(self, data_folder, batch_size, to01=True, shuffle=True,
-                 seed=None):
+    def __init__(self, train_imgs, train_lbs, test_imgs, test_lbls, batch_size,
+                 to01=True, shuffle=True, seed=None):
         """
-        data_folder should be the directory where the numpy arrays are located.
         Use seed optionally to always get the same shuffling (-> reproducible
         results).
         """
         self.batch_size = batch_size
-        self.train_data = np.load(os.path.join(data_folder,
-                                               "mnist_train_imgs.npy"))
-        self.train_labels = np.load(os.path.join(data_folder,
-                                                 "mnist_train_lbls.npy"))
-        self.test_data = np.load(os.path.join(data_folder,
-                                              "mnist_test_imgs.npy"))
-        self.test_labels = np.load(os.path.join(data_folder,
-                                                "mnist_test_lbls.npy"))
+        self.train_data = train_imgs
+        self.train_labels = train_lbs.astype(np.int32)
+        self.test_data = test_imgs
+        self.test_labels = test_lbls.astype(np.int32)
 
         if to01:
             # int in [0, 255] -> float in [0, 1]
